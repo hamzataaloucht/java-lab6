@@ -7,15 +7,16 @@ public class Shop {
     public static void main(String[] args) {
         ArrayList<Item> cart = new ArrayList<>();
 
-        Item item;
-        String itemName;
-        double itemPrice;
-        int quantity;
 
         Scanner scan = new Scanner(System.in);
         String keepShopping;
 
         do {
+            Item item;
+            String itemName;
+            double itemPrice;
+            int quantity;
+
             System.out.print("Enter the name of the item: ");
             itemName = scan.nextLine();
 
@@ -30,12 +31,16 @@ public class Shop {
             item = new Item(itemName, itemPrice, quantity);
             cart.add(item);
 
-            System.out.println(cart);
+            double total = 0.0;
+            for (Item cartItem : cart) {
+                System.out.println(cartItem);
+                total += cartItem.getPrice() * cartItem.getQuantity();
+            }
+            System.out.printf("Total: %.2f%n", total);
 
             System.out.print("Continue shopping (y/n)? ");
             keepShopping = scan.nextLine();
-        }
-        while (keepShopping.equals("y"));
+        } while (keepShopping.equals("y"));
 
         scan.close();
     }
